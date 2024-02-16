@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 01:45:53 by panther           #+#    #+#             */
-/*   Updated: 2024/02/14 18:49:55 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:05:20 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*update_line(char *line)
 		free(line);
 		return (NULL);
 	}
-	len_line = ft_strlen(line);
+	len_line = ft_strlen_gnl(line);
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (line[i] == '\n')

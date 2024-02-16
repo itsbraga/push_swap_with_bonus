@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 01:40:54 by panther           #+#    #+#             */
-/*   Updated: 2024/02/14 18:47:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:06:06 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "colors.h"
-
-# include "libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 6

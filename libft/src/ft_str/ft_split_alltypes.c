@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_alltypes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:29:00 by annabrag          #+#    #+#             */
-/*   Updated: 2023/11/24 16:51:45 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/08 21:46:00 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-static int	word_len(char const *s, char c)
+static int	word_len(char const *s)
 {
-	int		len;
+	int	len;
 
 	len = 0;
-	while (*s && *s != c)
+	while (*s && *s != iam_a_space(*s))
 	{
 		len++;
 		s++;
@@ -25,17 +25,17 @@ static int	word_len(char const *s, char c)
 	return (len);
 }
 
-static int	word_count(char const *s, char c)
+static int	word_count(char const *s)
 {
 	int	counter;
 
 	counter = 0;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s != iam_a_space(*s))
 		{
 			counter++;
-			s += word_len(s, c);
+			s += word_len(s);
 		}
 		else
 			s++;
@@ -57,16 +57,16 @@ static void	*free_f(char **split, size_t i)
 	return (NULL);
 }
 
-static char	*ft_strdup2(char const *s, char c)
+static char	*ft_strdup2(char const *s)
 {
 	char	*dup;
 	size_t	i;
 	size_t	len;
 
 	len = 0;
-	while (s[len] && s[len] != c)
+	while (s[len] && s[len] != iam_a_space(*s))
 		len++;
-	dup = (char *)malloc(sizeof(char) * (len + 1));
+	dup = malloc(sizeof(char) * (len + 1));
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -79,7 +79,7 @@ static char	*ft_strdup2(char const *s, char c)
 	return (dup);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_alltypes(char const *s)
 {
 	char	**split;
 	int		i;
@@ -87,19 +87,19 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	counter = word_count(s, c);
-	split = (char **)malloc(sizeof(char *) * (counter + 1));
+	counter = word_count(s);
+	split = malloc(sizeof(char *) * (counter + 1));
 	if (!split)
 		return (NULL);
 	i = 0;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s != iam_a_space(*s))
 		{
-			split[i] = ft_strdup2(s, c);
+			split[i] = ft_strdup2(s);
 			if (!split[i++])
 				return (free_f(split, i));
-			s += word_len(s, c);
+			s += word_len(s);
 		}
 		else
 			s++;
@@ -108,7 +108,7 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		i;
 	char	**split = NULL;
@@ -116,13 +116,13 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (argc < 3)
 		return (0);
-	split = ft_split(argv[1], *argv[2]);
+	split = ft_split_alltypes(argv[1]);
 	if (!split)
 		return (0);
-	while (i < word_count(argv[1], argv[2][0]))
+	while (i < word_count(argv[1]))
 	{
 		printf("%s\n", split[i++]);
 		free(split[i++]);
 	}
 	free(split);
-}*/
+}

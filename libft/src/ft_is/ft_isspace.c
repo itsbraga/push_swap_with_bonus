@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdisplay.c                                    :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 21:05:15 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/09 21:33:14 by annabrag         ###   ########.fr       */
+/*   Created: 2024/02/08 21:31:30 by annabrag          #+#    #+#             */
+/*   Updated: 2024/02/08 21:38:01 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-void	display_list(t_list *lst)
+int	ft_isspace(int c)
 {
-	t_list	*tmp;
+	if (!(c == 32 || (c >= 9 && c <= 13)))
+		return (0);
+	return (1);
+}
 
-	tmp = lst;
-	while (tmp != NULL)
-	{
-		ft_putnbr_fd(*((int *)tmp->content), 1);
-		ft_putendl_fd("", 1);
-		tmp = tmp->next;
-	}
+char	iam_a_space(char c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
 }

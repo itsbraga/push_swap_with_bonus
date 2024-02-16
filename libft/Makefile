@@ -6,11 +6,15 @@
 #    By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 11:07:10 by annabrag          #+#    #+#              #
-#    Updated: 2024/02/16 16:01:03 by annabrag         ###   ########.fr        #
+#    Updated: 2024/02/16 17:27:13 by annabrag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-################################### COLORS #####################################
+#################################################################################
+#										#
+#				      COLORS					#
+#										#
+#################################################################################
 
 RESET		:=	\e[0m
 BOLD		:=	\e[1m
@@ -36,19 +40,40 @@ BRIGHT_BLUE	:=	\e[94m
 BRIGHT_PURPLE	:=	\e[95m
 BRIGHT_CYAN	:=	\e[96m
 
+# define rainbow
+# $(shell echo $(1) | sed -e "s/./\$(shell printf '\033[38;5;%dm' \$$(shell expr \( \$$(od -An -N1 -tu1 /dev/urandom) \% 6 + 196))&) /g")
+# endef
 
-################################### BASICS ###################################
+# COLORED_TEXT	:= $(call (rainbow))
+
+
+#################################################################################
+#										#
+#				    BASICS					#
+#										#
+#################################################################################
 
 NAME		=	libft.a
+LIBC		=	ar -rcs
+
 CC		=	cc
+
+MAKEFLAGS	+=	--no-print-directory
+DEPFLAGS	=	-MMD -MP
 CFLAGS		=	-Wall -Wextra -Werror -I
 INC		=	include/
+
 FSANITIZE	=	-fsanitize=address -g3
-LIBC		=	ar -rcs
+DEBUG		=	-g -O0
+
 RM		=	rm -rf
 
 
-################################### SOURCES ###################################
+#################################################################################
+#										#
+#				    SOURCES					#
+#										#
+#################################################################################
 
 FT_FD_DIR	= 	ft_fd/
 FT_FD_FILES	= 	ft_putchar_fd.c \
@@ -62,7 +87,8 @@ FT_IS_FILES	= 	ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isalnum.c \
 			ft_isascii.c \
-			ft_isprint.c
+			ft_isprint.c \
+			ft_isspace.c
 
 FT_MEM_DIR	=	ft_mem/
 FT_MEM_FILES	=	ft_memset.c \
@@ -86,6 +112,7 @@ FT_STR_FILES	=	ft_strlen.c \
 			ft_strjoin.c \
 			ft_strtrim.c \
 			ft_split.c \
+			ft_split_alltypes.c \
 			ft_strmapi.c \
 			ft_striteri.c \
 			ft_strisnum.c \
@@ -101,8 +128,7 @@ FT_TO_DIR	=	ft_to/
 FT_TO_FILES	=	ft_tolower.c \
 			ft_toupper.c \
 			ft_itoa.c \
-			ft_atoi.c \
-			ft_atol.c
+			ft_atoi.c
 
 FT_LST_DIR	=	ft_lst/
 FT_LST_FILES	=	ft_lstnew.c \
@@ -153,11 +179,17 @@ MATHS_FILES	=	ft_fibonacci.c \
 			ft_recursive_power.c
 
 
-######################## COMBINE DIRECTORIES AND FILES ########################
+#################################################################################
+#										#
+#				COMBINE FILES					#
+#				    and						#
+#				DIRECTORIES					#
+#									  	#
+#################################################################################
 
 SRC_DIR		=	src/
 
-SRC_NAMES	=	$(addprefix $(FT_FD_DIR), $(FT_FD_FILES)) \
+SRCS		=	$(addprefix $(FT_FD_DIR), $(FT_FD_FILES)) \
 			$(addprefix $(FT_IS_DIR), $(FT_IS_FILES)) \
 			$(addprefix $(FT_MEM_DIR), $(FT_MEM_FILES)) \
 			$(addprefix $(FT_STR_DIR), $(FT_STR_FILES)) \
@@ -171,13 +203,13 @@ SRC_NAMES	=	$(addprefix $(FT_FD_DIR), $(FT_FD_FILES)) \
 
 OBJ_DIR		=	obj/
 
-OBJ_NAMES	=	$(SRC_NAMES:.c=.o)
+OBJ_NAMES	=	$(SRCS:.c=.o)
 
 OBJ_FOLDERS	=	$(addprefix $(OBJ_DIR), $(FT_FD_DIR) \
                 		$(FT_IS_DIR) \
 				$(FT_MEM_DIR) \
 				$(FT_STR_DIR) \
-                		$(FT_TO_DIR) \
+                   		$(FT_TO_DIR) \
 				$(FT_LST_DIR) \
                 		$(GNL_DIR) \
 				$(FT_PRINTF_DIR) \
@@ -185,40 +217,79 @@ OBJ_FOLDERS	=	$(addprefix $(OBJ_DIR), $(FT_FD_DIR) \
 				$(INT_DIR) \
 				$(MATHS_DIR))
 
-OBJ		=	$(addprefix $(OBJ_DIR), $(OBJ_NAMES))
+OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ_NAMES))
 
 
-#################################### RULES ####################################
+#################################################################################
+#										#
+#				DEPENDENCIES					#
+#										#
+#################################################################################
+
+DEP_NAMES	=	$(SRCS:.c=.d)
+
+DEP_FOLDERS	=	$(addprefix $(OBJ_DIR), $(FT_FD_DIR) \
+                		$(FT_IS_DIR) \
+				$(FT_MEM_DIR) \
+				$(FT_STR_DIR) \
+                   		$(FT_TO_DIR) \
+				$(FT_LST_DIR) \
+                		$(GNL_DIR) \
+				$(FT_PRINTF_DIR) \
+				$(FT_FROM_TO_DIR) \
+				$(INT_DIR) \
+				$(MATHS_DIR))
+
+DEPS		=	$(addprefix $(OBJ_DIR), $(DEP_NAMES))
+
+#################################################################################
+#										#
+#				     RULES					#
+#										#
+#################################################################################
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(dir $@)
 			@printf "$(ITAL)$(PURPLE)Compiling: $(RESET)$(ITAL)$<                                       \r"
-			@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+			@$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c $< -o $@
+
+-include $(DEPS)
 
 # link .o files to the library
-$(NAME): $(OBJ)
-		@$(LIBC) $(NAME) $(OBJ)
-		@printf "\n\n$(RESET)$(BOLD)$(PINK)[LIBFT]$(RESET), $(BOLD)$(BLUE)[GET_NEXT_LINE]$(RESET), $(BOLD)$(RED)[FT_PRINTF]$(RESET), $(BOLD)$(YELLOW)[POOL_FUNC]$(RESET) successfully compiled! ฅ^•ﻌ•^ฅ\n\n"
+$(NAME): $(OBJS)
+		@$(LIBC) $(NAME) $(OBJS)
+		@printf "\n\n$(RESET)$(BOLD)$(PINK)[LIBFT]$(RESET), $(BOLD)$(BLUE)[GET_NEXT_LINE]$(RESET), $(BOLD)$(RED)[FT_PRINTF]$(RESET), $(BOLD)$(YELLOW)[POOL_FUNC]$(RESET) successfully compiled!$(RESET)\n\n"
 		@printf "\n. ⋅ ˚̣- : ✧ : – ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ₊° ˗ ˏ ˋ ♡ ˎˊ ˗ °₊ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ – : ✧ : -˚̣⋅ .\n\n\n"
 
-all:		$(NAME)
+all:	$(NAME)
 
-san:		$(FSANITIZE)
+san:	$(FSANITIZE)
 
 clean:
-			@$(RM) $(OBJ_DIR)
-			@printf "\n$(BOLD)$(PINK)[LIBFT & Co.]:\t$(RESET)$(PINK)object files $(RESET)\t=> CLEANED!\n"
+		@$(RM) $(OBJ_DIR)
+		@printf "$(BOLD)$(PINK)[LIBFT & Co.]: $(RESET)$(PINK)object files $(RESET)\t=> CLEANED!\n\n"
 
-fclean: 	clean
-			@$(RM) $(NAME)
-			@find . -name ".DS_Store" -delete
-			@printf "$(BOLD)$(PINK)[LIBFT & Co.]: $(RESET)$(PINK)exec. files $(RESET)\t=> CLEANED!\n"
+fclean: clean
+		@$(RM) $(NAME)
+		@find . -name ".DS_Store" -delete
+		@find . -name "-Wall" -delete
+		@printf "$(BOLD)$(PINK)[LIBFT & Co.]: $(RESET)$(PINK)exec. files $(RESET)\t=> CLEANED!\n\n"
+		@printf "\n. ⋅ ˚̣- : ✧ : – ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ₊° ˗ ˏ ˋ ♡ ˎˊ ˗ °₊ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ – : ✧ : -˚̣⋅ .\n\n\n"
 
-re:		fclean all
-			@printf "\n\n✨ $(BOLD)$(YELLOW)Cleaning and rebuilding done! $(RESET)✨\n"
+re:	fclean all
+		@printf "\n\n✨ $(BOLD)$(YELLOW)Cleaning and rebuilding done! $(RESET)✨\n"
+
+diff:
+		$(info Repository's status, and the volume of per-file changes:)
+		@printf "$(RESET)\n\n"
+		@git status
+		@git diff --stat
+
+# leak:
+# 		@valgrind --leak-check=full --track-origins=yes --leak-resolution=high --show-leak-kinds=all ./program
 
 norm:
-			@clear
-			@norminette $(SRC_DIR) $(INC) | grep -v Norme -B1 || true
+		@clear
+		@norminette $(SRC_DIR) $(INC) | grep -v Norme -B1 || true
 
 .PHONY:		all clean fclean re norm
