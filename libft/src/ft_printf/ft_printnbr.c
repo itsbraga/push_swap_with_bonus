@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:45:29 by panther           #+#    #+#             */
-/*   Updated: 2023/11/24 17:27:27 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/17 01:24:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_printnbr(int n)
 	char	*nbr;
 	int		input;
 
-	input = 0;
 	nbr = ft_itoa(n);
 	input = ft_printstr(nbr);
 	free(nbr);

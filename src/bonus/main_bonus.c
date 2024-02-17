@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 22:28:28 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/15 09:34:34 by annabrag         ###   ########.fr       */
+/*   Created: 2024/02/14 16:03:26 by annabrag          #+#    #+#             */
+/*   Updated: 2024/02/17 00:47:17 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
-t_bool	is_sorted(t_stack *node)
+bool	is_sorted(t_stack *node)
 {
-	t_stack		*tmp;
+	t_stack	*tmp;
 
 	if (!node)
 		return (false);
@@ -22,45 +22,57 @@ t_bool	is_sorted(t_stack *node)
 	while (tmp->next != NULL)
 	{
 		if (tmp->content > tmp->next->content)
-		                                       	return (false);
+			return (false);
 		tmp = tmp->next;
 	}
-	return (true);                     
+	return (true);
 }
 
-void	push_swap(t_stack **a, t_stack **b)
+static int	checker(t_stack **a, t_stack **b)
 {
-	int		size_a;
+	char	*line;
 
-	size_a = stack_size(*a);
-	if (size_a <= 5 && !is_sorted(*a))
-		sort_mini(a, b);
-	else if (size_a > 5 && !is_sorted(*a))
-		sort(a, b);
+	while (92110)
+	{
+		line = get_next_line(0, false);
+		if (!line)
+			break ;
+		if (do_op(a, b, line) == EXIT_FAILURE)
+		{
+			get_next_line(0, true);
+			free(line);
+			return (1);
+		}
+		free(line);
+	}
+	get_next_line(0, true);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack		*a;
-	t_stack		*b;
+	t_stack	*a;
+	t_stack	*b;
 
-	a = NULL;
 	if (argc < 2)
 		return (EXIT_FAILURE);
 	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
+		argv = ft_split(argv[1], " \t");
 	else
 		(argv++);
 	if (!global_check_successful(argv))
-	{
-		free_split(argc, argv);
-		return (EXIT_FAILURE);
-	}
+		return (free_split(argc, argv), EXIT_FAILURE);
 	a = convert_n_fill_stack(argc, argv);
 	if (!a)
 		exit_error_stack(&a, NULL, argc, argv);
 	b = NULL;
-	(set_pos(&a), push_swap(&a, &b));
+	if (checker(&a, &b))
+		return ((clear_stack(&a), clear_stack(&b)), free_split(argc, argv),
+			EXIT_FAILURE);
+	if (is_sorted(a) && b == NULL)
+		write(STDOUT_FILENO, "OK\n", 3);
+	else
+		write(STDOUT_FILENO, "KO\n", 3);
 	(clear_stack(&a), clear_stack(&b));
 	free_split(argc, argv);
 	return (EXIT_SUCCESS);

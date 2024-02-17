@@ -6,7 +6,7 @@
 #    By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 11:07:10 by annabrag          #+#    #+#              #
-#    Updated: 2024/02/16 17:27:13 by annabrag         ###   ########.fr        #
+#    Updated: 2024/02/17 02:26:19 by annabrag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,59 +76,27 @@ RM		=	rm -rf
 #################################################################################
 
 FT_FD_DIR	= 	ft_fd/
-FT_FD_FILES	= 	ft_putchar_fd.c \
-			ft_putendl_fd.c \
-			ft_putnbr_fd.c \
-			ft_putstr_fd.c \
-			ft_putstr_color_fd.c
+FT_FD_FILES	= 	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+			ft_putstr_fd.c ft_putstr_color_fd.c
 
 FT_IS_DIR 	= 	ft_is/
-FT_IS_FILES	= 	ft_isalpha.c \
-			ft_isdigit.c \
-			ft_isalnum.c \
-			ft_isascii.c \
-			ft_isprint.c \
-			ft_isspace.c
+FT_IS_FILES	= 	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
+			ft_isprint.c ft_isspace.c
 
 FT_MEM_DIR	=	ft_mem/
-FT_MEM_FILES	=	ft_memset.c \
-			ft_memcpy.c \
-			ft_memmove.c \
-			ft_memchr.c \
-			ft_memcmp.c \
-			ft_bzero.c \
-			ft_calloc.c
+FT_MEM_FILES	=	ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c \
+			ft_memcmp.c ft_bzero.c ft_calloc.c
 			
 FT_STR_DIR	=	ft_str/
-FT_STR_FILES	=	ft_strlen.c \
-			ft_strlcpy.c \
-			ft_strlcat.c \
-			ft_strchr.c \
-			ft_strrchr.c \
-			ft_strncmp.c \
-			ft_strnstr.c \
-			ft_strdup.c \
-			ft_substr.c \
-			ft_strjoin.c \
-			ft_strtrim.c \
-			ft_split.c \
-			ft_split_alltypes.c \
-			ft_strmapi.c \
-			ft_striteri.c \
-			ft_strisnum.c \
-			ft_strcapitalize.c \
-			ft_strcat.c \
-			ft_strcmp.c \
-			ft_strlowcase.c \
-			ft_strupcase.c \
-			ft_strncat.c \
-			ft_strstr.c
+FT_STR_FILES	=	ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c \
+			ft_strrchr.c ft_strncmp.c ft_strnstr.c ft_strdup.c \
+			ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
+			ft_strmapi.c ft_striteri.c \
+			ft_strisnum.c ft_strcapitalize.c ft_strcat.c ft_strcmp.c \
+			ft_strlowcase.c ft_strupcase.c ft_strncat.c ft_strstr.c
 
 FT_TO_DIR	=	ft_to/
-FT_TO_FILES	=	ft_tolower.c \
-			ft_toupper.c \
-			ft_itoa.c \
-			ft_atoi.c
+FT_TO_FILES	=	ft_tolower.c ft_toupper.c ft_itoa.c ft_atoi.c ft_atol.c
 
 FT_LST_DIR	=	ft_lst/
 FT_LST_FILES	=	ft_lstnew.c \
@@ -160,14 +128,6 @@ FT_FROM_TO_FI	=	ft_convert_base.c \
 			ft_convert_base2.c \
 			ft_putnbr_base.c
 
-INT_DIR		=	int/
-INT_FILES	=	ft_print_comb.c \
-			ft_print_comb2.c \
-			ft_range.c \
-			ft_rev_int_tab.c \
-			ft_sort_int_tab.c \
-			ft_ultimate_range.c
-
 MATHS_DIR	=	maths/
 MATHS_FILES	=	ft_fibonacci.c \
 			ft_is_prime.c \
@@ -198,7 +158,6 @@ SRCS		=	$(addprefix $(FT_FD_DIR), $(FT_FD_FILES)) \
 			$(addprefix $(GNL_DIR), $(GNL_FILES)) \
 			$(addprefix $(FT_PRINTF_DIR), $(FT_PRINTF_FI)) \
 			$(addprefix $(FT_FROM_TO_DIR), $(FT_FROM_TO_FI)) \
-			$(addprefix $(INT_DIR), $(INT_FILES)) \
 			$(addprefix $(MATHS_DIR), $(MATHS_FILES))
 
 OBJ_DIR		=	obj/
@@ -214,7 +173,6 @@ OBJ_FOLDERS	=	$(addprefix $(OBJ_DIR), $(FT_FD_DIR) \
                 		$(GNL_DIR) \
 				$(FT_PRINTF_DIR) \
 				$(FT_FROM_TO_DIR) \
-				$(INT_DIR) \
 				$(MATHS_DIR))
 
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ_NAMES))
@@ -237,10 +195,10 @@ DEP_FOLDERS	=	$(addprefix $(OBJ_DIR), $(FT_FD_DIR) \
                 		$(GNL_DIR) \
 				$(FT_PRINTF_DIR) \
 				$(FT_FROM_TO_DIR) \
-				$(INT_DIR) \
 				$(MATHS_DIR))
 
-DEPS		=	$(addprefix $(OBJ_DIR), $(DEP_NAMES))
+DEP		=	$(addprefix $(OBJ_DIR), $(DEP_NAMES))
+
 
 #################################################################################
 #										#
@@ -248,36 +206,38 @@ DEPS		=	$(addprefix $(OBJ_DIR), $(DEP_NAMES))
 #										#
 #################################################################################
 
+all:	$(NAME)
+
+$(info )
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@mkdir -p $(dir $@)
-			@printf "$(ITAL)$(PURPLE)Compiling: $(RESET)$(ITAL)$<                                       \r"
+			@printf "$(BOLD)$(ITAL)$(PURPLE)Compiling: $(RESET)$(ITAL)$<                                       \r"
 			@$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c $< -o $@
-
--include $(DEPS)
+-include $(DEP)
 
 # link .o files to the library
 $(NAME): $(OBJS)
 		@$(LIBC) $(NAME) $(OBJS)
-		@printf "\n\n$(RESET)$(BOLD)$(PINK)[LIBFT]$(RESET), $(BOLD)$(BLUE)[GET_NEXT_LINE]$(RESET), $(BOLD)$(RED)[FT_PRINTF]$(RESET), $(BOLD)$(YELLOW)[POOL_FUNC]$(RESET) successfully compiled!$(RESET)\n\n"
-		@printf "\n. ⋅ ˚̣- : ✧ : – ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ₊° ˗ ˏ ˋ ♡ ˎˊ ˗ °₊ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ – : ✧ : -˚̣⋅ .\n\n\n"
-
-all:	$(NAME)
+		@printf "\n\n$(RESET)$(BOLD)$(PINK)[LIBFT]$(RESET), \
+$(BOLD)$(BLUE)[GET_NEXT_LINE]$(RESET), $(BOLD)$(RED)[FT_PRINTF]$(RESET), \
+$(BOLD)$(ORANGE)[MATHS FUNC.]$(RESET) $(BOLD)$(YELLOW)successfully compiled!$(RESET)\n\n"
+		@printf "\n. ⋅ ˚̣- : ✧ : – ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ₊° ˗ ˏ ˋ ♡ ˎˊ ˗ °₊ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ – : ✧ : -˚̣⋅ .\n\n\n\n"
 
 san:	$(FSANITIZE)
 
 clean:
 		@$(RM) $(OBJ_DIR)
-		@printf "$(BOLD)$(PINK)[LIBFT & Co.]: $(RESET)$(PINK)object files $(RESET)\t=> CLEANED!\n\n"
+		@printf "\n$(BOLD)$(PINK)[LIBFT, GNL, FT_PRINTF, MATHS FUNC.]:\t$(RESET)Clean completed!\n"
 
 fclean: clean
 		@$(RM) $(NAME)
 		@find . -name ".DS_Store" -delete
-		@find . -name "-Wall" -delete
-		@printf "$(BOLD)$(PINK)[LIBFT & Co.]: $(RESET)$(PINK)exec. files $(RESET)\t=> CLEANED!\n\n"
-		@printf "\n. ⋅ ˚̣- : ✧ : – ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ₊° ˗ ˏ ˋ ♡ ˎˊ ˗ °₊ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ – : ✧ : -˚̣⋅ .\n\n\n"
+		@printf "$(BOLD)$(PINK)[LIBFT, GNL, FT_PRINTF, MATHS FUNC.]:\t$(RESET)Full clean completed!\n\n"
+		@printf "\n. ⋅ ˚̣- : ✧ : – ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ₊° ˗ ˏ ˋ ♡ ˎˊ ˗ °₊ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ ⊹ ⭒ – : ✧ : -˚̣⋅ .\n\n"
 
 re:	fclean all
-		@printf "\n\n✨ $(BOLD)$(YELLOW)Cleaning and rebuilding done! $(RESET)✨\n"
+		@printf "✨ $(BOLD)$(YELLOW)Cleaning and rebuilding done! $(RESET)✨\n\n"
 
 diff:
 		$(info Repository's status, and the volume of per-file changes:)
@@ -292,4 +252,4 @@ norm:
 		@clear
 		@norminette $(SRC_DIR) $(INC) | grep -v Norme -B1 || true
 
-.PHONY:		all clean fclean re norm
+.PHONY:		all clean fclean re diff san norm

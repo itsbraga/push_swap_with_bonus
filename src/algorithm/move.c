@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 20:21:48 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/15 08:10:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:51:43 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,8 @@ static void	do_rb(t_stack **b, int *cost)
  */
 void	exec_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
 {
-	if (cost_a < 0 && cost_b < 0)
-		do_rrr(a, b, &cost_a, &cost_b);
-	else if (cost_a > 0 && cost_b > 0)
-		do_rr(a, b, &cost_a, &cost_b);
+	do_rrr(a, b, &cost_a, &cost_b);
+	do_rr(a, b, &cost_a, &cost_b);
 	do_ra(a, &cost_a);
 	do_rb(b, &cost_b);
 	pa(b, a);

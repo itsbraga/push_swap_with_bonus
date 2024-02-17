@@ -6,20 +6,18 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:11:28 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/15 08:10:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:03:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_bool	is_sign(char c)
+bool	is_sign(char c)
 {
-	if (!(c == '-' || c == '+'))
-		return (false);
-	return (true);
+	return (c == '-' || c == '+');
 }
 
-static t_bool	is_space(char *str)
+static bool	is_space(char *str)
 {
 	int	i;
 
@@ -29,7 +27,7 @@ static t_bool	is_space(char *str)
 	return (true);
 }
 
-static t_bool	is_only_digit(char *str)
+static bool	is_only_digit(char *str)
 {
 	int	i;
 
@@ -45,7 +43,7 @@ static t_bool	is_only_digit(char *str)
 	return (true);
 }
 
-static t_bool	have_duplicates(char **argv)
+static bool	have_duplicates(char **argv)
 {
 	int	i;
 	int	j;
@@ -65,7 +63,7 @@ static t_bool	have_duplicates(char **argv)
 	return (false);
 }
 
-t_bool	global_check_successful(char **argv)
+bool	global_check_successful(char **argv)
 {
 	int	i;
 	int	nb_zeros;

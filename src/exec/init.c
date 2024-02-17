@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 21:49:52 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/15 08:10:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:26:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ t_stack	*convert_n_fill_stack(int argc, char **argv)
 			exit_error_stack(&a, NULL, argc, argv);
 		i++;
 	}
+	check_doubles(a, argc, argv);
 	return (a);
 }

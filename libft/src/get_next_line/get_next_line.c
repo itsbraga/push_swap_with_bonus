@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 22:39:22 by panther           #+#    #+#             */
-/*   Updated: 2024/02/16 17:05:47 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 20:55:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ char	*use_read_on_line(int fd, char *line)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, bool tofree)
 {
 	char		*read_line;
 	static char	*line[1024];
 
+	if (tofree)
+		return (free(line[fd]), NULL);
 	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line[fd] = use_read_on_line(fd, line[fd]);

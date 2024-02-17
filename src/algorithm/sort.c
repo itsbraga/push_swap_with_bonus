@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:35:15 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/15 08:10:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/17 01:17:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 *	rotation on B. Then, it pushes the top elem of A onto B. This process
 *	continues until the size of A is reduced to 5.
 */
-static void	way2five(t_stack **a, t_stack **b)
+static void	way2three(t_stack **a, t_stack **b)
 {
 	int	size_a;
 
 	size_a = stack_size(*a);
-	while (size_a > 5)
+	while (size_a > 3)
 	{
-		if ((*a) < find_min(*b))
-			rrb(b);
 		pb(a, b);
 		size_a--;
 	}
@@ -44,7 +42,7 @@ static void	final_rotate(t_stack **a)
 
 	size = stack_size(*a);
 	lowest_idx = get_lowest_idx(a);
-	median = (stack_size(*a) / 2);
+	median = (size / 2);
 	if (lowest_idx > median)
 	{
 		while (lowest_idx < size)
@@ -65,7 +63,7 @@ static void	final_rotate(t_stack **a)
 
 void	sort(t_stack **a, t_stack **b)
 {
-	way2five(a, b);
+	way2three(a, b);
 	sort_mini(a, b);
 	while (*b)
 	{

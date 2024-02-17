@@ -6,105 +6,92 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:29:00 by annabrag          #+#    #+#             */
-/*   Updated: 2023/11/24 16:51:45 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:50:29 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-static int	word_len(char const *s, char c)
+int	i_belong2charset(char c, char *charset)
 {
-	int		len;
+	int	i;
 
-	len = 0;
-	while (*s && *s != c)
+	i = 0;
+	while (charset[i])
 	{
-		len++;
-		s++;
+		if (c == charset[i])
+			return (1);
+		i++;
 	}
-	return (len);
+	return (0);
 }
 
-static int	word_count(char const *s, char c)
+int	word_count(char *str, char *charset)
 {
+	int	i;
 	int	counter;
 
+	i = 0;
 	counter = 0;
-	while (*s)
+	while (str[i])
 	{
-		if (*s != c)
+		if (!i_belong2charset(str[i], charset))
 		{
 			counter++;
-			s += word_len(s, c);
+			while (str[i] && !i_belong2charset(str[i], charset))
+				i++;
 		}
 		else
-			s++;
+			i++;
 	}
 	return (counter);
 }
 
-static void	*free_f(char **split, size_t i)
+static char	*ft_strxdup(char *str, char *charset)
 {
-	size_t	j;
-
-	j = 0;
-	while (j < i)
-	{
-		free(split[j]);
-		j++;
-	}
-	free(split);
-	return (NULL);
-}
-
-static char	*ft_strdup2(char const *s, char c)
-{
+	int		i;
+	int		slen;
 	char	*dup;
-	size_t	i;
-	size_t	len;
 
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	dup = (char *)malloc(sizeof(char) * (len + 1));
+	i = 0;
+	slen = ft_strlen(str);
+	dup = malloc(sizeof(char) * (slen + 1));
 	if (!dup)
 		return (NULL);
-	i = 0;
-	while (i < len)
+	while (str[i] && (!i_belong2charset(str[i], charset)))
 	{
-		dup[i] = s[i];
+		dup[i] = str[i];
 		i++;
 	}
 	dup[i] = '\0';
 	return (dup);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *str, char *charset)
 {
-	char	**split;
 	int		i;
+	int		j;
 	int		counter;
+	char	**split;
 
-	if (!s)
-		return (NULL);
-	counter = word_count(s, c);
-	split = (char **)malloc(sizeof(char *) * (counter + 1));
+	counter = word_count(str, charset);
+	split = malloc(sizeof(char *) * (counter + 1));
 	if (!split)
 		return (NULL);
 	i = 0;
-	while (*s)
+	j = 0;
+	while (str[i])
 	{
-		if (*s != c)
+		if (!i_belong2charset(str[i], charset))
 		{
-			split[i] = ft_strdup2(s, c);
-			if (!split[i++])
-				return (free_f(split, i));
-			s += word_len(s, c);
+			split[j++] = ft_strxdup(&str[i], charset);
+			while (str[i] && !i_belong2charset(str[i], charset))
+				i++;
 		}
 		else
-			s++;
+			i++;
 	}
-	split[i] = NULL;
+	split[j] = NULL;
 	return (split);
 }
 

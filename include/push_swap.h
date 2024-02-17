@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:26:52 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/15 02:18:30 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:11:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <limits.h>
 
 # include "../libft/include/libft.h"
@@ -33,11 +34,11 @@
 /*									*/
 /************************************************************************/
 
-typedef enum Bool
-{
-	false,
-	true
-}		t_bool;
+// typedef enum Bool
+// {
+// 	false,
+// 	true
+// }		bool;
 
 // idx est la ou est situe la valeur dans la stack
 // pos est la ou doit etre situee la valeur apres le tri
@@ -95,7 +96,7 @@ void		exec_move(t_stack **a, t_stack **b, int cost_a, int cost_b);
 
 void		sort_mini(t_stack **a, t_stack **b);
 void		sort(t_stack **a, t_stack **b);
-t_bool		is_sorted(t_stack *node);
+bool		is_sorted(t_stack *node);
 
 /************************************************************************/
 /*									*/
@@ -149,10 +150,12 @@ void		show_stack(t_stack *node, char c);
 /*									*/
 /************************************************************************/
 
-t_bool		is_sign(char c);
+bool		is_sign(char c);
 int			nb_strcmp(const char *s1, const char *s2);
+void		check_doubles(t_stack *a, int argc, char **argv);
+
 int			have_zeros(char *str);
-t_bool		global_check_successful(char **argv);
+bool		global_check_successful(char **argv);
 int			split_case(char **argv, t_stack *a);
 t_stack		*convert_n_fill_stack(int argc, char **argv);
 

@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:09:22 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/15 03:38:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/17 00:45:53 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ static void	push(t_stack **a, t_stack **b, char *move)
 
 int	do_op(t_stack **a, t_stack **b, char *move)
 {
-	if (!move)
-		return (EXIT_FAILURE);
 	if (!ft_strcmp(move, "sa\n") || !ft_strcmp(move, "sb\n")
 		|| !ft_strcmp(move, "ss\n"))
 		swap(a, b, move);
