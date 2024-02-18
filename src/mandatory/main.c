@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:28:28 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/17 00:27:07 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:34:23 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	push_swap(t_stack **a, t_stack **b)
 	int	size_a;
 
 	size_a = stack_size(*a);
-	if (size_a <= 5 && !is_sorted(*a))
-		sort_mini(a, b);
-	else if (size_a > 5 && !is_sorted(*a))
+	if (size_a <= 3 && !is_sorted(*a))
+		sort_mini(a);
+	else if (size_a > 3 && !is_sorted(*a))
 		sort(a, b);
 }
 

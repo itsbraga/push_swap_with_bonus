@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:26:52 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/16 21:11:49 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:33:49 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		exec_move(t_stack **a, t_stack **b, int cost_a, int cost_b);
 /*									*/
 /************************************************************************/
 
-void		sort_mini(t_stack **a, t_stack **b);
+void		sort_mini(t_stack **a);
 void		sort(t_stack **a, t_stack **b);
 bool		is_sorted(t_stack *node);
 
@@ -135,9 +135,6 @@ void		free_split(int argc, char **argv);
 /************************************************************************/
 
 t_stack		*find_min(t_stack *node);
-// int			get_min_idx(t_stack *node);
-int			find_min_content(t_stack *node);
-int			get_distance_from_min(t_stack **a, int min);
 void		set_idx(t_stack **stack);
 void		set_pos(t_stack **stack);
 int			get_lowest_idx(t_stack **stack);

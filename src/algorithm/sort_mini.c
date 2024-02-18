@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:36:00 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/15 08:10:32 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:33:30 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,49 +41,7 @@ static void	sort_three(t_stack **stack)
 	}
 }
 
-static void	sort_four(t_stack **a, t_stack **b)
-{
-	int	min;
-	int	dist;
-
-	min = find_min_content(*a);
-	dist = get_distance_from_min(a, min);
-	if (dist <= 2 && dist != 0)
-		ra(a);
-	if (dist == 2)
-		ra(a);
-	if (dist == 3)
-		rra(a);
-	if (is_sorted(*a) == true)
-		return ;
-	pb(a, b);
-	sort_three(a);
-	pa(b, a);
-}
-
-static void	sort_five(t_stack **a, t_stack **b)
-{
-	int	min;
-	int	dist;
-
-	min = find_min_content(*a);
-	dist = get_distance_from_min(a, min);
-	if (is_sorted(*a) == true)
-		return ;
-	if (dist <= 2 && dist != 0)
-		ra(a);
-	if (dist == 2)
-		ra(a);
-	if (dist == 3 || dist == 4)
-		rra(a);
-	if (dist == 3)
-		rra(a);
-	pb(a, b);
-	sort_four(a, b);
-	pa(b, a);
-}
-
-void	sort_mini(t_stack **a, t_stack **b)
+void	sort_mini(t_stack **a)
 {
 	int	size;
 
@@ -92,8 +50,4 @@ void	sort_mini(t_stack **a, t_stack **b)
 		sa(a);
 	else if (size == 3)
 		sort_three(a);
-	else if (size == 4)
-		sort_four(a, b);
-	else if (size == 5)
-		sort_five(a, b);
 }

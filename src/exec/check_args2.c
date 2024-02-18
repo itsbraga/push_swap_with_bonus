@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:57:28 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/16 21:13:37 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:32:22 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ int	nb_strcmp(const char *s1, const char *s2)
 void	check_doubles(t_stack *a, int argc, char **argv)
 {
 	t_stack	*tmp;
-	t_stack	*debut;
+	t_stack	*first;
 
 	tmp = a;
 	while (tmp->next)
 	{
-		debut = tmp->next;
-		while (debut)
+		first = tmp->next;
+		while (first)
 		{
-			if (debut->content == tmp->content)
+			if (first->content == tmp->content)
 				exit_error_stack(&a, NULL, argc, argv);
-			debut = debut->next;
+			first = first->next;
 		}
 		tmp = tmp->next;
 	}

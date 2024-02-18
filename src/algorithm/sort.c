@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:35:15 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/17 01:17:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:33:36 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	final_rotate(t_stack **a)
 void	sort(t_stack **a, t_stack **b)
 {
 	way2three(a, b);
-	sort_mini(a, b);
+	sort_mini(a);
 	while (*b)
 	{
 		get_target_idx(b, a);
