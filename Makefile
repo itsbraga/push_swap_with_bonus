@@ -74,10 +74,10 @@ OP_DIR		=	operations/
 OP_FILES	=	swap.c rotate.c reverse_rotate.c push.c
 
 UTILS_DIR	=	utils/
-UTILS_FILES	=	stack.c set_elem.c display.c
+UTILS_FILES	=	stack.c set_elem.c utils.c
 
 ALGO_DIR	=	algorithm/
-ALGO_FILES	=	sort_mini.c sort.c cost.c move.c min_functions.c
+ALGO_FILES	=	sort_mini.c sort.c cost.c move.c
 
 EXEC_DIR	=	exec/
 EXEC_FILES	=	check_args.c check_args2.c error_handler.c init.c
