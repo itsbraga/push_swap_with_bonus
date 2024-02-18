@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:03:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/17 00:47:17 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:51:31 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	checker(t_stack **a, t_stack **b)
 {
 	char	*line;
 
-	while (92110)
+	while (1)
 	{
 		line = get_next_line(0, false);
 		if (!line)

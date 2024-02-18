@@ -218,7 +218,7 @@ diff:
 
 norm:
 		@clear
-		@norminette $(SRC_DIR) $(BONUS_DIR) $(INC) $(LIBFT_PATH) | grep -v Norme -B1 || true
+		@norminette $(SRC_DIR) $(INC) $(LIBFT_PATH) | grep -v Norme -B1 || true
 
 # leak:
 # 		@valgrind --leak-check=full --track-origins=yes --leak-resolution=high --show-leak-kinds=all ./push_swap
