@@ -169,11 +169,6 @@ build:
 		@make -sC $(LIBFT_PATH) $(MAKEFLAGS)
 		@mv $(LIBFT_PATH)/libft.a .
 		@make all
-		@printf "\n\n\t\t\t──▒▒▒▒▒▒───▄████▄\n"
-		@printf "\t\t\t─▒─▄▒─▄▒──███▄█▀\n"
-		@printf "\t\t\t─▒▒▒▒▒▒▒─▐████──█─█\n"
-		@printf "\t\t\t─▒▒▒▒▒▒▒──█████▄\n"
-		@printf "\t\t\t─▒─▒─▒─▒───▀████▀\n\n\n"
 
 all:		$(PUSH_SWAP)
 
@@ -188,6 +183,15 @@ $(PUSH_SWAP): $(OBJ)
 $(info )
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
+					@if [ ! -f .build ]; then \
+						printf "\t\t\t%s\n" \
+						"──▒▒▒▒▒▒───▄████▄" \
+						"─▒─▄▒─▄▒──███▄█▀" \
+						"─▒▒▒▒▒▒▒─▐████──█─█" \
+						"─▒▒▒▒▒▒▒──█████▄" \
+						"─▒─▒─▒─▒───▀████▀"; \
+						printf "\n\n"; \
+						touch .build; fi
 					@mkdir -p $(dir $@)
 					@printf "$(BOLD)$(ITAL)$(PURPLE)Compiling: $(RESET)$(ITAL)$<               \r"
 					@$(CC) $(DEBUG) $(CFLAGS) $(INC) $(DEPFLAGS) -c $< -o $@
@@ -202,6 +206,7 @@ fclean: clean
 			@$(RM) $(PUSH_SWAP) $(CHECKER)
 			@$(RM) $(LIBFT_PATH)/libft.a
 			@$(RM) libft.a
+			@find . -name ".build" -delete
 			@find . -name ".DS_Store" -delete
 			@printf "$(BOLD)$(PINK)[LIBFT, GNL, FT_PRINTF, MATHS FUNC.]:\t$(RESET)Full clean completed!\n"
 			@printf "$(BOLD)$(CYAN)[PUSH_SWAP]:\t\t\t\t$(RESET)Full clean completed!\n\n"
