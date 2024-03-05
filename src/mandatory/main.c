@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:28:28 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/19 00:16:54 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:27:46 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 
-	a = NULL;
 	if (argc < 2)
 		return (EXIT_FAILURE);
 	if (argc == 2)
@@ -65,7 +64,6 @@ int	main(int argc, char **argv)
 		exit_error_stack(&a, NULL, argc, argv);
 	b = NULL;
 	(set_pos(&a), push_swap(&a, &b));
-	(clear_stack(&a), clear_stack(&b));
-	free_split(argc, argv);
+	(clear_stack(&a), clear_stack(&b), free_split(argc, argv));
 	return (EXIT_SUCCESS);
 }

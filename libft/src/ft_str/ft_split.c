@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:29:00 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/18 23:26:10 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:54:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ char	**ft_split(char *str, char *charset)
 	split = malloc(sizeof(char *) * (counter + 1));
 	if (!split)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (!i_belong2charset(str[i], charset))
 		{
@@ -90,28 +90,28 @@ char	**ft_split(char *str, char *charset)
 			while (str[i] && !i_belong2charset(str[i], charset))
 				i++;
 		}
-		else
-			i++;
 	}
 	split[j] = NULL;
 	return (split);
 }
 
-/*int	main(int argc, char **argv)
-{
-	int		i;
-	char	**split = NULL;
+// int	main(int argc, char **argv)
+// {
+// 	int		i;
+// 	char	**split;
 
-	i = 0;
-	if (argc < 3)
-		return (0);
-	split = ft_split(argv[1], *argv[2]);
-	if (!split)
-		return (0);
-	while (i < word_count(argv[1], argv[2][0]))
-	{
-		printf("%s\n", split[i++]);
-		free(split[i++]);
-	}
-	free(split);
-}*/
+// 	i = 0;
+// 	split = NULL;
+// 	if (argc < 3)
+// 		return (0);
+// 	split = ft_split(argv[1], argv[2]);
+// 	if (!split)
+// 		return (0);
+// 	while (i < word_count(argv[1], argv[2]))
+// 	{
+// 		printf("%s\n", split[i]);
+// 		free(split[i]);
+// 		i++;
+// 	}
+// 	free(split);
+// }

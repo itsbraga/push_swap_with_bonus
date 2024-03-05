@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:03:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/19 00:16:16 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/03/06 00:09:25 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,26 @@ static int	checker(t_stack **a, t_stack **b)
 	return (0);
 }
 
+static void	begin_main(int argc, char ***argv)
+{
+	if (argc < 2)
+		exit (EXIT_FAILURE);
+	if (argc == 2)
+	{
+		*argv = ft_split(*argv[1], " \t");
+		if (!*argv)
+			exit (1);
+	}
+	else
+		(*argv)++;
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
 
-	if (argc < 2)
-		return (EXIT_FAILURE);
-	if (argc == 2)
-	{
-		argv = ft_split(argv[1], " \t");
-		if (!argv)
-			return (1);
-	}
-	else
-		(argv++);
+	begin_main(argc, &argv);
 	if (!global_check_successful(argv))
 		return (free_split(argc, argv), EXIT_FAILURE);
 	a = convert_n_fill_stack(argc, argv);
