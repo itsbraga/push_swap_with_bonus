@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:03:26 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/18 20:51:31 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/19 00:16:16 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (EXIT_FAILURE);
 	if (argc == 2)
+	{
 		argv = ft_split(argv[1], " \t");
+		if (!argv)
+			return (1);
+	}
 	else
 		(argv++);
 	if (!global_check_successful(argv))
@@ -73,7 +77,6 @@ int	main(int argc, char **argv)
 		write(STDOUT_FILENO, "OK\n", 3);
 	else
 		write(STDOUT_FILENO, "KO\n", 3);
-	(clear_stack(&a), clear_stack(&b));
-	free_split(argc, argv);
+	(clear_stack(&a), clear_stack(&b), free_split(argc, argv));
 	return (EXIT_SUCCESS);
 }

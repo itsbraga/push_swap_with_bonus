@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:28:28 by art3mis           #+#    #+#             */
-/*   Updated: 2024/02/18 15:34:23 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/19 00:16:54 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (EXIT_FAILURE);
 	if (argc == 2)
+	{
 		argv = ft_split(argv[1], " \t");
+		if (!argv)
+			return (EXIT_FAILURE);
+	}
 	else
 		(argv++);
 	if (!global_check_successful(argv))

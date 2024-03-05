@@ -6,7 +6,7 @@
 /*   By: annabrag <annabrag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:29:00 by annabrag          #+#    #+#             */
-/*   Updated: 2024/02/17 00:50:29 by annabrag         ###   ########.fr       */
+/*   Updated: 2024/02/18 23:26:10 by annabrag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char	**ft_split(char *str, char *charset)
 	int		counter;
 	char	**split;
 
+	if (!str || !str[0])
+		return (NULL);
 	counter = word_count(str, charset);
 	split = malloc(sizeof(char *) * (counter + 1));
 	if (!split)
