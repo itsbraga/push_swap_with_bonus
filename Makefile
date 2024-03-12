@@ -10,8 +10,6 @@ DIM			:=	\e[2m
 ITAL		:=	\e[3m
 UNDERLINE	:=	\e[4m
 
-BLACK		:=	\e[30m
-GRAY		:=	\e[90m
 RED			:=	\e[31m
 GREEN		:=	\e[32m
 YELLOW		:=	\e[33m
@@ -20,19 +18,6 @@ BLUE		:=	\e[34m
 PURPLE		:=	\e[35m
 PINK		:=	\033[38;2;255;182;193m
 CYAN		:=	\e[36m
-
-BRIGHT_BLACK	:=	\e[90m
-BRIGHT_GREEN	:=	\e[92m
-BRIGHT_YELLOW	:=	\e[93m
-BRIGHT_BLUE		:=	\e[94m
-BRIGHT_PURPLE	:=	\e[95m
-BRIGHT_CYAN		:=	\e[96m
-
-# define rainbow
-# $(shell echo $(1) | sed -e "s/./\$(shell printf '\033[38;5;%dm' \$$(shell expr \( \$$(od -An -N1 -tu1 /dev/urandom) \% 6 + 196))&) /g")
-# endef
-
-# COLORED_TEXT	:= $(call (rainbow))
 
 
 #################################################################################
@@ -179,7 +164,6 @@ $(PUSH_SWAP): $(OBJ)
 				@$(CC) $(CFLAGS) $(INC) $(OBJ) libft.a -o $(PUSH_SWAP)
 				@printf "Your program is ready to launch! ˚̩͙⚛ ͙*\n\n"
 
-#@printf "\n\n$(COLORED_TEXT)Ceci est un texte coloré en arc-en-ciel\n"
 $(info )
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
